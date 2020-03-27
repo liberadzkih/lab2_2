@@ -50,4 +50,10 @@ class SimilarityFinderStateTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void bothSequencesAreEmpty() {
+        double actual = similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq);
+        double expected = 1.0;
+    }
 }
