@@ -49,4 +49,8 @@ public class SequenceSearcherMock implements SequenceSearcher {
         methodInvocationSet.add(new MethodInvocation(elem, seq));
         return null;
     }
+
+    public int getAmountOfInvocations() {
+        return methodInvocationSet.size();
+    }
 }
