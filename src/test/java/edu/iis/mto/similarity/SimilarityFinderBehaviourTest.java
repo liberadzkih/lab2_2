@@ -45,4 +45,12 @@ class SimilarityFinderBehaviourTest {
         sequenceSearcherMock.verifyCalled(2, emptySeq);
         sequenceSearcherMock.verifyCalled(3, emptySeq);
     }
+
+    @Test
+    public void firstSeqHasOneElementsSecondsHasThree() {
+        similarityFinder.calculateJackardSimilarity(oneElementSeq, threeElementsSeq);
+
+        Assertions.assertEquals(1,sequenceSearcherMock.getAmountOfInvocations());
+        sequenceSearcherMock.verifyCalled(1, threeElementsSeq);
+    }
 }
