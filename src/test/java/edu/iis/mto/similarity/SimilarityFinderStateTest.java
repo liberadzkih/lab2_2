@@ -26,4 +26,13 @@ class SimilarityFinderStateTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void firstSeqHasFiveSecondHasZero() {
+        double actual = similarityFinder.calculateJackardSimilarity(fiveElementsSeq, emptySeq);
+        double expected = 0;
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 }
