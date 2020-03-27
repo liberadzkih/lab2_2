@@ -55,5 +55,15 @@ class SimilarityFinderStateTest {
     public void bothSequencesAreEmpty() {
         double actual = similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq);
         double expected = 1.0;
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void bothSequencesHaveFiveElements() {
+        double actual = similarityFinder.calculateJackardSimilarity(fiveElementsSeq, fiveElementsSeq);
+        double expected = 1.0;
+
+        Assertions.assertEquals(expected, actual);
     }
 }
