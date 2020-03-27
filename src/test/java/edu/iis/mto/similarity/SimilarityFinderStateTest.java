@@ -15,14 +15,14 @@ class SimilarityFinderStateTest {
 
     @BeforeEach
     public void setup() {
-        //MUST BE DONE
+        //IMPLEMENTATION MUST BE PROVIDED BEFORE STARTING TESTS
         //similarityFinder = new SimilarityFinder();
     }
 
     @Test
     public void firstSeqHasZeroSecondHasFive() {
         double actual = similarityFinder.calculateJackardSimilarity(emptySeq, fiveElementsSeq);
-        double expected = 0.0;
+        double expected = 0.0d;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -30,7 +30,7 @@ class SimilarityFinderStateTest {
     @Test
     public void firstSeqHasFiveSecondHasZero() {
         double actual = similarityFinder.calculateJackardSimilarity(fiveElementsSeq, emptySeq);
-        double expected = 0.0;
+        double expected = 0.0d;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -38,7 +38,7 @@ class SimilarityFinderStateTest {
     @Test
     public void firstSeqHasOneSecondHasFive() {
         double actual = similarityFinder.calculateJackardSimilarity(oneElementSeq, fiveElementsSeq);
-        double expected = 0.2;
+        double expected = 0.2d;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -46,7 +46,7 @@ class SimilarityFinderStateTest {
     @Test
     public void firstSeqHasFiveSecondHasOne() {
         double actual = similarityFinder.calculateJackardSimilarity(fiveElementsSeq, oneElementSeq);
-        double expected = 0.2;
+        double expected = 0.2d;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -54,7 +54,7 @@ class SimilarityFinderStateTest {
     @Test
     public void bothSequencesAreEmpty() {
         double actual = similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq);
-        double expected = 1.0;
+        double expected = 1.0d;
 
         Assertions.assertEquals(expected, actual);
     }
@@ -62,7 +62,7 @@ class SimilarityFinderStateTest {
     @Test
     public void bothSequencesHaveFiveElements() {
         double actual = similarityFinder.calculateJackardSimilarity(fiveElementsSeq, fiveElementsSeq);
-        double expected = 1.0;
+        double expected = 1.0d;
 
         Assertions.assertEquals(expected, actual);
     }
