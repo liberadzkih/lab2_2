@@ -37,7 +37,7 @@ public class SequenceSearcherMock implements SequenceSearcher {
 
     private final Set<MethodInvocation> methodInvocationSet = new HashSet<>();
 
-    void verifyCalled(int elem, int[] seq) {
+    public void verifyCalled(int elem, int[] seq) {
         boolean called = methodInvocationSet.contains(new MethodInvocation(elem, seq));
         if(!called) {
             throw new AssertionError("Expected invocation wasn't called!");
@@ -47,7 +47,7 @@ public class SequenceSearcherMock implements SequenceSearcher {
     @Override
     public SearchResult search(int elem, int[] seq) {
         methodInvocationSet.add(new MethodInvocation(elem, seq));
-        return null;
+        return SearchResult.builder().build();
     }
 
     public int getAmountOfInvocations() {
