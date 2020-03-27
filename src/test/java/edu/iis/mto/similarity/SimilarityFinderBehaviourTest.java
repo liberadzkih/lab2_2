@@ -35,4 +35,14 @@ class SimilarityFinderBehaviourTest {
 
         Assertions.assertEquals(0, sequenceSearcherMock.getAmountOfInvocations());
     }
+
+    @Test
+    public void firstSeqHasThreeElementsSecondIsEmpty() {
+        similarityFinder.calculateJackardSimilarity(threeElementsSeq, emptySeq);
+
+        Assertions.assertEquals(3,sequenceSearcherMock.getAmountOfInvocations());
+        sequenceSearcherMock.verifyCalled(1, emptySeq);
+        sequenceSearcherMock.verifyCalled(2, emptySeq);
+        sequenceSearcherMock.verifyCalled(3, emptySeq);
+    }
 }
