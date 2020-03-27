@@ -2,6 +2,7 @@ package edu.iis.mto.similarity;
 
 import edu.iis.mto.search.SequenceSearcher;
 import edu.iis.mto.search.SequenceSearcherMock;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,4 +22,10 @@ class SimilarityFinderBehaviourTest {
         similarityFinder = new SimilarityFinder(sequenceSearcherMock);
     }
 
+    @Test
+    public void bothSequencesAreEmpty() {
+        similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq);
+
+        Assertions.assertEquals(0, sequenceSearcherMock.getAmountOfInvocations());
+    }
 }
