@@ -1,5 +1,6 @@
 package edu.iis.mto.similarity;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,4 +19,11 @@ class SimilarityFinderStateTest {
         //similarityFinder = new SimilarityFinder();
     }
 
+    @Test
+    public void firstSeqHasZeroSecondHasFive() {
+        double actual = similarityFinder.calculateJackardSimilarity(emptySeq, fiveElementsSeq);
+        double expected = 0;
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
