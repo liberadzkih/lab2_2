@@ -42,4 +42,12 @@ class SimilarityFinderStateTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void firstSeqHasFiveSecondHasOne() {
+        double actual = similarityFinder.calculateJackardSimilarity(fiveElementsSeq, oneElementSeq);
+        double expected = 0.2;
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
