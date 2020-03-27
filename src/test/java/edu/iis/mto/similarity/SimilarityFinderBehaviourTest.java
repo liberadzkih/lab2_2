@@ -10,14 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class SimilarityFinderBehaviourTest {
 
     SimilarityFinder similarityFinder;
-    SequenceSearcher sequenceSearcher;
+    SequenceSearcherMock sequenceSearcherMock;
+    final int[] emptySeq = {};
+    final int[] oneElementSeq = {1};
+    final int[] threeElementsSeq = {1,2,3};
 
     @BeforeEach
     public void setup() {
-        sequenceSearcher = new SequenceSearcherMock();
-        similarityFinder = new SimilarityFinder(sequenceSearcher);
+        sequenceSearcherMock = new SequenceSearcherMock();
+        similarityFinder = new SimilarityFinder(sequenceSearcherMock);
     }
-
-
 
 }
