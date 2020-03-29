@@ -14,7 +14,7 @@ public class SequenceSearcherDubler implements SequenceSearcher {
         return null;
     }
 
-    private class BehaviuorInformation {
+    private static class BehaviuorInformation {
         int elem;
         int[] seq;
 
@@ -40,9 +40,9 @@ public class SequenceSearcherDubler implements SequenceSearcher {
         return behaviuorInformationList.size();
     }
 
-    public void verifySearchInvocation(int elem, int [] seq){
-        if(behaviuorInformationList.contains(new BehaviuorInformation(elem,seq))){
-            throw  new AssertionError("Expected method execution didn't happen or was not registered!");
+    public void verifySearchInvocation(int elem, int[] seq) {
+        if (behaviuorInformationList.contains(new BehaviuorInformation(elem, seq))) {
+            throw new AssertionError("Expected method execution didn't happen or was not registered!");
         }
     }
 }
