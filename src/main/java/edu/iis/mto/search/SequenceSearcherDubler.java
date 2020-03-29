@@ -7,6 +7,7 @@ public class SequenceSearcherDubler implements SequenceSearcher {
 
     @Override
     public SearchResult search(int elem, int[] seq) {
+        behaviuorInformationList.add(new BehaviuorInformation(elem, seq));
         return null;
     }
 
