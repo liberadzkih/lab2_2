@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SimilarityFinderBehaviourTest {
     int[] testseqEmpty = {};
     int[] testseqOneElement = {1};
+    int[] testseqDifferentElement = {41};
     int[] testseqFiveElements = {1, 2, 3, 4, 5};
     SimilarityFinder similarityFinder;
     SequenceSearcherDubler sequenceSearcherDubler;
@@ -69,5 +70,13 @@ public class SimilarityFinderBehaviourTest {
         sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[2],testseqFiveElements);
         sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[3],testseqFiveElements);
         sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[4],testseqFiveElements);
+    }
+
+    @Test
+    void calculateJackardSimilarity_noMatchingElements() {
+        similarityFinder.calculateJackardSimilarity(testseqDifferentElement,testseqFiveElements);
+        assertEquals(1,sequenceSearcherDubler.getSearchInvocationAmout());
+
+        sequenceSearcherDubler.verifySearchInvocation(testseqDifferentElement[0],testseqFiveElements);
     }
 }
