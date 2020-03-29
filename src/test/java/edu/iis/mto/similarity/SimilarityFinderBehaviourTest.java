@@ -20,15 +20,26 @@ public class SimilarityFinderBehaviourTest {
 
     @Test
     void calculateJackardSimilarity_bothSeqAreEmpty() {
-        similarityFinder.calculateJackardSimilarity(testseqEmpty,testseqEmpty);
-        assertEquals(0,sequenceSearcherDubler.getSearchInvocationAmout());
+        similarityFinder.calculateJackardSimilarity(testseqEmpty, testseqEmpty);
+        assertEquals(0, sequenceSearcherDubler.getSearchInvocationAmout());
     }
 
     @Test
     void calculateJackardSimilarity_seq1IsEmpty() {
-        similarityFinder.calculateJackardSimilarity(testseqEmpty,testseqFiveElements);
-        assertEquals(0,sequenceSearcherDubler.getSearchInvocationAmout());
+        similarityFinder.calculateJackardSimilarity(testseqEmpty, testseqFiveElements);
+        assertEquals(0, sequenceSearcherDubler.getSearchInvocationAmout());
     }
 
+    @Test
+    void calculateJackardSimilarity_seq2IsEmpty() {
+        similarityFinder.calculateJackardSimilarity(testseqFiveElements, testseqEmpty);
+        assertEquals(5, sequenceSearcherDubler.getSearchInvocationAmout());
 
+        sequenceSearcherDubler.verifySearchInvocation(1, testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(2, testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(3, testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(4, testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(5, testseqEmpty);
+
+    }
 }
