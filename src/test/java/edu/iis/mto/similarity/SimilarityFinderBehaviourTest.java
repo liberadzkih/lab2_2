@@ -34,7 +34,7 @@ class SimilarityFinderBehaviourTest {
             if (!parametersCalled.containsKey(elem)) {
                 return false;
             }
-            return Arrays.equals(parametersCalled.get(elem),seq);
+            return Arrays.equals(parametersCalled.get(elem), seq);
         }
     }
 
@@ -47,7 +47,7 @@ class SimilarityFinderBehaviourTest {
 
     @BeforeEach
     void intit() {
-        mockSequenceSearcher=new MockSequenceSearcher();
+        mockSequenceSearcher = new MockSequenceSearcher();
     }
 
     @Test
