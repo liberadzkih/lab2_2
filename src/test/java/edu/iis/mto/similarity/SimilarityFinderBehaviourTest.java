@@ -54,29 +54,29 @@ public class SimilarityFinderBehaviourTest {
 
     @Test
     void calculateJackardSimilarity_allElementsMatchSeqlen1() {
-        similarityFinder.calculateJackardSimilarity(testseqOneElement,testseqOneElement);
-        assertEquals(1,sequenceSearcherDubler.getSearchInvocationAmout());
+        similarityFinder.calculateJackardSimilarity(testseqOneElement, testseqOneElement);
+        assertEquals(1, sequenceSearcherDubler.getSearchInvocationAmout());
 
-        sequenceSearcherDubler.verifySearchInvocation(testseqOneElement[0],testseqOneElement);
+        sequenceSearcherDubler.verifySearchInvocation(testseqOneElement[0], testseqOneElement);
     }
 
     @Test
     void calculateJackardSimilarity_allElementsMatchSeqlen5() {
-        similarityFinder.calculateJackardSimilarity(testseqFiveElements,testseqFiveElements);
-        assertEquals(5,sequenceSearcherDubler.getSearchInvocationAmout());
+        similarityFinder.calculateJackardSimilarity(testseqFiveElements, testseqFiveElements);
+        assertEquals(5, sequenceSearcherDubler.getSearchInvocationAmout());
 
-        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[0],testseqFiveElements);
-        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[1],testseqFiveElements);
-        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[2],testseqFiveElements);
-        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[3],testseqFiveElements);
-        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[4],testseqFiveElements);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[0], testseqFiveElements);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[1], testseqFiveElements);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[2], testseqFiveElements);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[3], testseqFiveElements);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[4], testseqFiveElements);
     }
 
     @Test
     void calculateJackardSimilarity_noMatchingElements() {
-        similarityFinder.calculateJackardSimilarity(testseqDifferentElement,testseqFiveElements);
-        assertEquals(1,sequenceSearcherDubler.getSearchInvocationAmout());
+        similarityFinder.calculateJackardSimilarity(testseqDifferentElement, testseqFiveElements);
+        assertEquals(1, sequenceSearcherDubler.getSearchInvocationAmout());
 
-        sequenceSearcherDubler.verifySearchInvocation(testseqDifferentElement[0],testseqFiveElements);
+        sequenceSearcherDubler.verifySearchInvocation(testseqDifferentElement[0], testseqFiveElements);
     }
 }
