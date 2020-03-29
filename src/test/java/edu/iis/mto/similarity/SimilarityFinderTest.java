@@ -25,8 +25,8 @@ class SimilarityFinderTest {
         int[] sequence1 = { 0, 1, 2, 3, 4, 5 };
         int[] sequence2 = { 3, 0, 5, 2, 1, 4 };
 
-        simFinder = new SimilarityFinder((key, seq) -> {
-            if (IntStream.of(seq).anyMatch(x -> x == key)) {
+        simFinder = new SimilarityFinder((findingTheSame, sequence) -> {
+            if (IntStream.of(sequence).anyMatch(x -> x == findingTheSame)) {
                 return SearchResult.builder().withFound(true).build();
             } else {
                 return SearchResult.builder().withFound(false).build();
@@ -40,7 +40,25 @@ class SimilarityFinderTest {
     public void findInTheDifferentSequences() {
         int[] sequence1 = { 0, 1, 2, 3, 4, 5 };
         int[] sequence2 = { 6, 7, 8, 9, 10, 11 };
+
         simFinder = new SimilarityFinder((key, seq) -> SearchResult.builder().withFound(false).build());
+
         Assert.assertThat(simFinder.calculateJackardSimilarity(sequence1, sequence2), is(equalTo(0d)));
+    }
+
+    @Test
+    public void findInHalfTheSameSequences() {
+        int[] sequence1 = { 0, 1, 2, 3, 4, 5 };
+        int[] sequence2 = { 6, 1, 2, 3, 4, 8 };
+
+        simFinder = new SimilarityFinder((findingTheSame, sequence) -> {
+            if (IntStream.of(sequence).anyMatch(x -> x == findingTheSame)) {
+                return SearchResult.builder().withFound(true).build();
+            } else {
+                return SearchResult.builder().withFound(false).build();
+            }
+        });
+
+        Assert.assertThat(simFinder.calculateJackardSimilarity(sequence1, sequence2), is(equalTo(0.5d)));
     }
 }
