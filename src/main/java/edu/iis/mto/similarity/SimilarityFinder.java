@@ -10,7 +10,7 @@ public class SimilarityFinder {
         this.searcher = searcher;
     }
 
-    public double calculateJackardSimilarity(int[] seq1, int[] seq2) {
+    public double calculateJaccardSimilarity(int[] seq1, int[] seq2) {
         if (seq1.length == 0 && seq2.length == 0) {
             return 1.0d;
         }
