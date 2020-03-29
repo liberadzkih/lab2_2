@@ -1,6 +1,5 @@
 package edu.iis.mto.similarity;
 
-import edu.iis.mto.search.SequenceSearcherDubler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,5 +23,12 @@ public class SimilarityFinderBehaviourTest {
         similarityFinder.calculateJackardSimilarity(testseqEmpty,testseqEmpty);
         assertEquals(0,sequenceSearcherDubler.getSearchInvocationAmout());
     }
+
+    @Test
+    void calculateJackardSimilarity_seq1IsEmpty() {
+        similarityFinder.calculateJackardSimilarity(testseqEmpty,testseqFiveElements);
+        assertEquals(0,sequenceSearcherDubler.getSearchInvocationAmout());
+    }
+
 
 }

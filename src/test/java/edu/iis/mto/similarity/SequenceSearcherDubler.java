@@ -1,4 +1,7 @@
-package edu.iis.mto.search;
+package edu.iis.mto.similarity;
+
+import edu.iis.mto.search.SearchResult;
+import edu.iis.mto.search.SequenceSearcher;
 
 import java.util.ArrayList;
 import java.util.List;

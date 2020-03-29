@@ -1,6 +1,5 @@
 package edu.iis.mto.similarity;
 
-import edu.iis.mto.search.SequenceSearcherDubler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
