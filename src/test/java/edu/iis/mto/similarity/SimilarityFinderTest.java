@@ -37,4 +37,16 @@ public class SimilarityFinderTest {
         int[] collection2 = {3,2,1};
         Assert.assertThat(similarityFinder.calculateJaccardSimilarity(collection1, collection2), is(equalTo(1d)));
     }
+
+    @Test
+    public void jaccardSimilarityOnPartiallyEqualCollections() {
+        similarityFinder = new SimilarityFinder((key, seq) -> {
+            if (key == seq[0] || key == seq[1] || key == seq[2] || key == seq[3])
+                return SearchResult.builder().withFound(true).build();
+            return SearchResult.builder().withFound(false).build();
+        });
+        int[] collection1 = {1,2,3,4,5};
+        int[] collection2 = {2,3,5,6};
+        Assert.assertThat(similarityFinder.calculateJaccardSimilarity(collection1, collection2), is(equalTo(0.5d)));
+    }
 }
