@@ -8,18 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SimilarityFinderTest {
+class SimilarityFinderStateTest {
 
     private SimilarityFinder similarityFinder;
     private SequenceSearcherMock sequenceSearcherMock;
     private static final double FULL_MATCH = 1.0d;
     private static final double ONE_FIFTH_MATCH = 0.2d;
     private static final double ZERO_MATH = 0.0d;
-    
-    private int[] emptySeq = {};
-    private int[] sequenceWithOneElement = { 1 };
-    private int[] sequenceWithMultipleElements1 = { 1, 2, 3, 4, 5 };
-    private int[] sequenceWithMultipleElements2 = { 10, 20, 30, 40 };
+
+    private final int[] EMPTY_SET = {};
+    private final int[] SEQ_WITH_ONE_ELEMENT = { 1 };
+    private final int[] SEQ_WITH_MULTIPLE_ELEMENTS1 = { 1, 2, 3, 4, 5 };
+    private final int[] SEQ_WITH_MULTIPLE_ELEMENTS2 = { 10, 20, 30, 40 };
 
     @BeforeEach
     void setUp() {
@@ -29,48 +29,50 @@ class SimilarityFinderTest {
 
     @Test
     void shouldReturnOneWhenTwoEmptySeq() {
-        assertThat(similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq), is(equalTo(FULL_MATCH)));
+        assertThat(similarityFinder.calculateJackardSimilarity(EMPTY_SET, EMPTY_SET), is(equalTo(FULL_MATCH)));
     }
 
     @Test
     void shouldReturnZeroWhenOneEmptySeq() {
-        assertThat(similarityFinder.calculateJackardSimilarity(emptySeq, sequenceWithMultipleElements1),
+        assertThat(similarityFinder.calculateJackardSimilarity(EMPTY_SET, SEQ_WITH_MULTIPLE_ELEMENTS1),
                 is(equalTo(ZERO_MATH)));
     }
 
     @Test
     void shouldReturnZeroWithTwoDifferentMultipleSeq() {
-        assertThat(similarityFinder.calculateJackardSimilarity(sequenceWithMultipleElements1,
-                sequenceWithMultipleElements2), is(equalTo(ZERO_MATH)));
+        assertThat(
+                similarityFinder.calculateJackardSimilarity(SEQ_WITH_MULTIPLE_ELEMENTS1, SEQ_WITH_MULTIPLE_ELEMENTS2),
+                is(equalTo(ZERO_MATH)));
     }
 
     @Test
     void shouldReturnZeroWithTwoDifferentSeqWhenOneContainsOneElement() {
-        assertThat(similarityFinder.calculateJackardSimilarity(sequenceWithMultipleElements2, sequenceWithOneElement),
+        assertThat(similarityFinder.calculateJackardSimilarity(SEQ_WITH_MULTIPLE_ELEMENTS2, SEQ_WITH_ONE_ELEMENT),
                 is(equalTo(ZERO_MATH)));
     }
 
     @Test
     void shouldReturnOneFifthWhenOneElementTheSameInBothSeq() {
-        assertThat(similarityFinder.calculateJackardSimilarity(sequenceWithMultipleElements1, sequenceWithOneElement),
+        assertThat(similarityFinder.calculateJackardSimilarity(SEQ_WITH_MULTIPLE_ELEMENTS1, SEQ_WITH_ONE_ELEMENT),
                 is(equalTo(ONE_FIFTH_MATCH)));
     }
 
     @Test
     void shouldReturnOneWhenTwoTheSameSeq() {
-        assertThat(similarityFinder.calculateJackardSimilarity(sequenceWithMultipleElements1,
-                sequenceWithMultipleElements1), is(equalTo(FULL_MATCH)));
+        assertThat(
+                similarityFinder.calculateJackardSimilarity(SEQ_WITH_MULTIPLE_ELEMENTS1, SEQ_WITH_MULTIPLE_ELEMENTS1),
+                is(equalTo(FULL_MATCH)));
     }
 
     @Test
     void shouldThrowExceptionWhenNullParameter1() {
         assertThrows(NullPointerException.class,
-                () -> similarityFinder.calculateJackardSimilarity(null, sequenceWithOneElement));
+                () -> similarityFinder.calculateJackardSimilarity(null, SEQ_WITH_ONE_ELEMENT));
     }
 
     @Test
     void shouldThrowExceptionWhenNullParameter2() {
         assertThrows(NullPointerException.class,
-                () -> similarityFinder.calculateJackardSimilarity(sequenceWithOneElement, null));
+                () -> similarityFinder.calculateJackardSimilarity(SEQ_WITH_ONE_ELEMENT, null));
     }
 }
