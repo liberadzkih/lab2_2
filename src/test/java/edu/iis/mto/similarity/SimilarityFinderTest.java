@@ -50,6 +50,17 @@ public class SimilarityFinderTest {
         int[] collection2 = {2,3,5,6};
         Assert.assertThat(similarityFinder.calculateJaccardSimilarity(collection1, collection2), is(equalTo(0.5d)));
     }
+
+    @Test
+    public void jaccardSimilarityNumberOfCallsForFirstSequence(){
+        SequenceSearcherCounterDubler sequenceSearcherCounterDubler = new SequenceSearcherCounterDubler();
+        similarityFinder = new SimilarityFinder(sequenceSearcherCounterDubler);
+        int[] collection1 = {1,2,3};
+        int[] collection2 = {1,2,3,4,5,6};
+        similarityFinder.calculateJaccardSimilarity(collection1,collection2);
+        Assert.assertThat(sequenceSearcherCounterDubler.getCounter(),is(equalTo(3)));
+    }
+
     private static class SequenceSearcherCounterDubler implements SequenceSearcher {
         private int counter = 0;
 
