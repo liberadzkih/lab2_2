@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SimilarityFinderStateTest {
     int[] testseqEmpty = {};
     int[] testseqOneElement = {1};
+    int[] testseqDifferentElement = {41};
     int[] testseqTenElements = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     SimilarityFinder similarityFinder;
 
@@ -24,23 +25,31 @@ class SimilarityFinderStateTest {
 
     @Test
     void calculateJackardSimilarity_seq1IsEmpty() {
-        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqEmpty,testseqTenElements));
+        assertEquals(0.0d, similarityFinder.calculateJackardSimilarity(testseqEmpty, testseqTenElements));
     }
 
     @Test
     void calculateJackardSimilarity_seq2IsEmpty() {
-        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqEmpty));
+        assertEquals(0.0d, similarityFinder.calculateJackardSimilarity(testseqTenElements, testseqEmpty));
     }
 
     @Test
     void calculateJackardSimilarity_oneElementMatches() {
-        assertEquals(0.1d,similarityFinder.calculateJackardSimilarity(testseqOneElement,testseqTenElements));
-        assertEquals(0.1d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqOneElement));
+        assertEquals(0.1d, similarityFinder.calculateJackardSimilarity(testseqOneElement, testseqTenElements));
+        assertEquals(0.1d, similarityFinder.calculateJackardSimilarity(testseqTenElements, testseqOneElement));
     }
 
     @Test
     void calculateJackardSimilarity_allElementsMatch() {
-        assertEquals(1.0d,similarityFinder.calculateJackardSimilarity(testseqOneElement,testseqOneElement));
-        assertEquals(1.0d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqTenElements));
+        assertEquals(1.0d, similarityFinder.calculateJackardSimilarity(testseqOneElement, testseqOneElement));
+        assertEquals(1.0d, similarityFinder.calculateJackardSimilarity(testseqTenElements, testseqTenElements));
+    }
+
+    @Test
+    void calculateJackardSimilarity_noMatchingElements() {
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqOneElement,testseqDifferentElement));
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqDifferentElement,testseqOneElement));
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqDifferentElement));
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqDifferentElement,testseqTenElements));
     }
 }
