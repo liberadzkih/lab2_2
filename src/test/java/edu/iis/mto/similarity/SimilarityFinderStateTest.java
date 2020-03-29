@@ -37,4 +37,10 @@ class SimilarityFinderStateTest {
         assertEquals(0.1d,similarityFinder.calculateJackardSimilarity(testseqOneElement,testseqTenElements));
         assertEquals(0.1d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqOneElement));
     }
+
+    @Test
+    void calculateJackardSimilarity_allElementsMatch() {
+        assertEquals(1.0d,similarityFinder.calculateJackardSimilarity(testseqOneElement,testseqOneElement));
+        assertEquals(1.0d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqTenElements));
+    }
 }
