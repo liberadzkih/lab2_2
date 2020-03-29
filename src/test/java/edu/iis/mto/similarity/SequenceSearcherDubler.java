@@ -41,7 +41,7 @@ public class SequenceSearcherDubler implements SequenceSearcher {
     }
 
     public void verifySearchInvocation(int elem, int[] seq) {
-        if (behaviuorInformationList.contains(new BehaviuorInformation(elem, seq))) {
+        if (!behaviuorInformationList.contains(new BehaviuorInformation(elem, seq))) {
             throw new AssertionError("Expected method execution didn't happen or was not registered!");
         }
     }
