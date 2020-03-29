@@ -35,4 +35,12 @@ class SimilarityFinderTest {
 
         Assert.assertThat(simFinder.calculateJackardSimilarity(sequence1, sequence2), is(equalTo(1.0d)));
     }
+
+    @Test
+    public void findInTheDifferentSequences() {
+        int[] sequence1 = { 0, 1, 2, 3, 4, 5 };
+        int[] sequence2 = { 6, 7, 8, 9, 10, 11 };
+        simFinder = new SimilarityFinder((key, seq) -> SearchResult.builder().withFound(false).build());
+        Assert.assertThat(simFinder.calculateJackardSimilarity(sequence1, sequence2), is(equalTo(0d)));
+    }
 }
