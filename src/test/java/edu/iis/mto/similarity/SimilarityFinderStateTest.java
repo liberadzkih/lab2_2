@@ -27,4 +27,8 @@ class SimilarityFinderStateTest {
         assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqEmpty,testseqTenElements));
     }
 
+    @Test
+    void calculateJackardSimilarity_seq2IsEmpty() {
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqEmpty));
+    }
 }
