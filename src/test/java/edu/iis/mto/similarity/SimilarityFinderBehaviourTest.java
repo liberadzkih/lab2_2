@@ -35,11 +35,19 @@ public class SimilarityFinderBehaviourTest {
         similarityFinder.calculateJackardSimilarity(testseqFiveElements, testseqEmpty);
         assertEquals(5, sequenceSearcherDubler.getSearchInvocationAmout());
 
-        sequenceSearcherDubler.verifySearchInvocation(1, testseqEmpty);
-        sequenceSearcherDubler.verifySearchInvocation(2, testseqEmpty);
-        sequenceSearcherDubler.verifySearchInvocation(3, testseqEmpty);
-        sequenceSearcherDubler.verifySearchInvocation(4, testseqEmpty);
-        sequenceSearcherDubler.verifySearchInvocation(5, testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[0], testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[1], testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[2], testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[3], testseqEmpty);
+        sequenceSearcherDubler.verifySearchInvocation(testseqFiveElements[4], testseqEmpty);
 
+    }
+
+    @Test
+    void calculateJackardSimilarity_oneElementMatching() {
+        similarityFinder.calculateJackardSimilarity(testseqOneElement, testseqFiveElements);
+        assertEquals(1, sequenceSearcherDubler.getSearchInvocationAmout());
+
+        sequenceSearcherDubler.verifySearchInvocation(testseqOneElement[0], testseqFiveElements);
     }
 }
