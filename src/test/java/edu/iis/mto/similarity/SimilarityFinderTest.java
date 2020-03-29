@@ -17,4 +17,12 @@ public class SimilarityFinderTest {
         int[] collection2 = {};
         Assert.assertThat(similarityFinder.calculateJaccardSimilarity(collection1, collection2), is(equalTo(1.0d)));
     }
+
+    @Test
+    public void jaccardSimilarityForDifferentCollections() {
+        similarityFinder = new SimilarityFinder((key, seq) -> SearchResult.builder().withFound(false).build());
+        int[] collection1 = {1,2,3};
+        int[] collection2 = {4,5,6};
+        Assert.assertThat(similarityFinder.calculateJaccardSimilarity(collection1, collection2), is(equalTo(0d)));
+    }
 }
