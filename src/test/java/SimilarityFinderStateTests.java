@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SimilarityFinderStateTests {
     private int[] emptySequence = {};
-    private int[] regularSequence = {-2, -1, 0, 1, 2};
+    private int[] singleElementSequence = {1};
+    private int[] regularSequence = {-4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
 
     @Test
     public void emptySequencesTest() {
@@ -25,5 +26,18 @@ public class SimilarityFinderStateTests {
     public void emptySequenceTest() {
         SimilarityFinder similarityFinder = new SimilarityFinder((elem, seq) -> SearchResult.builder().withFound(false).build());
         assertEquals(0, similarityFinder.calculateJackardSimilarity(regularSequence, emptySequence));
+    }
+
+    @Test
+    public void oneElementMatchTest() {
+        SimilarityFinder similarityFinder = new SimilarityFinder(((elem, seq) -> {
+            for (int sequenceElement : seq) {
+                if (sequenceElement == elem) {
+                    return SearchResult.builder().withFound(true).build();
+                }
+            }
+            return SearchResult.builder().withFound(false).build();
+        }));
+        assertEquals(0.1, similarityFinder.calculateJackardSimilarity(singleElementSequence, regularSequence), 0.0001);
     }
 }
