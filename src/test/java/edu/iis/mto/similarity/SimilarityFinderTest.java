@@ -17,7 +17,6 @@ class SimilarityFinderTest {
     int[] seq9 ={};
     int[] seq10={6,9,1,3,0};
     int[] seq11={6,2,9,7,8};
-    int[] seq12={6,7,8,2,3};
     SimilarityFinder similarityFinder = new SimilarityFinder(new MockForSequenceSearcher());
 
     @Test void return_zero_if_two_single_element_sequences_dont_have_the_same_element() {
@@ -47,5 +46,6 @@ class SimilarityFinderTest {
     @Test void  return_quarter_if_two_five_elements_sequences_have_two_the_same_element() { // 0.25 = 2/(5+5-2)
         assertEquals(0.25,similarityFinder.calculateJackardSimilarity(seq10,seq11));
     }
-    
+
+
 }
