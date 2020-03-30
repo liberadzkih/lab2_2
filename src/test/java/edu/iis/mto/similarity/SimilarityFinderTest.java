@@ -87,4 +87,15 @@ class SimilarityFinderTest {
         assertEquals(5,mock.getSearchInvocationCounter());
     }
 
+    @Test
+    void SequenceSearcher_should_be_invoke_with_parameters_in_array_sequence(){
+        int[] sampleArray={1,2,3,4,5};
+        int[] sampleArray2={3,4,5,6,7,8,9};
+        SequenceSearcherMock mock =new SequenceSearcherMock();
+        SimilarityFinder similarityFinder=new SimilarityFinder(mock);
+
+        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
+
+        assertTrue(mock.hasSameElements(sampleArray));
+    }
 }
