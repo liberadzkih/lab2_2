@@ -8,13 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SimilarityFinderStateTests {
     private int[] emptySequence = {};
     private int[] singleElementSequence = {1};
-    private int[] regularSequence = {-4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
-
-    @Test
-    public void emptySequencesTest() {
-        SimilarityFinder similarityFinder = new SimilarityFinder((elem, seq) -> SearchResult.builder().withFound(false).build());
-        assertEquals(1, similarityFinder.calculateJackardSimilarity(emptySequence, emptySequence));
-    }
+    private int[] multipleElementsSequence = {-4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
 
     @Test
     public void nullSequencesTest() {
@@ -23,9 +17,15 @@ public class SimilarityFinderStateTests {
     }
 
     @Test
-    public void emptySequenceTest() {
+    public void emptySequencesTest() {
         SimilarityFinder similarityFinder = new SimilarityFinder((elem, seq) -> SearchResult.builder().withFound(false).build());
-        assertEquals(0, similarityFinder.calculateJackardSimilarity(regularSequence, emptySequence));
+        assertEquals(1, similarityFinder.calculateJackardSimilarity(emptySequence, emptySequence));
+    }
+
+    @Test
+    public void oneEmptySequenceTest() {
+        SimilarityFinder similarityFinder = new SimilarityFinder((elem, seq) -> SearchResult.builder().withFound(false).build());
+        assertEquals(0, similarityFinder.calculateJackardSimilarity(multipleElementsSequence, emptySequence));
     }
 
     @Test
@@ -38,6 +38,6 @@ public class SimilarityFinderStateTests {
             }
             return SearchResult.builder().withFound(false).build();
         }));
-        assertEquals(0.1, similarityFinder.calculateJackardSimilarity(singleElementSequence, regularSequence), 0.0001);
+        assertEquals(0.1, similarityFinder.calculateJackardSimilarity(singleElementSequence, multipleElementsSequence), 0.0001);
     }
 }
