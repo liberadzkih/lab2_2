@@ -23,4 +23,10 @@ public class SimilarityFinderBehaviorTests {
         similarityFinder.calculateJackardSimilarity(emptySequence, emptySequence);
         assertEquals(0, sequenceSearcherMock.getNumberOfInvocations());
     }
+
+    @Test
+    public void searchShouldNotBeInvokedForEmptySequenceAsFirstArgument() {
+        similarityFinder.calculateJackardSimilarity(emptySequence, singleElementSequence);
+        assertEquals(0, sequenceSearcherMock.getNumberOfInvocations());
+    }
 }
