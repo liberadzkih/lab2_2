@@ -28,4 +28,26 @@ class SimilarityFinderTest {
         assertEquals(0,result);
     }
 
+    @Test
+    void two_array_of_two_the_same_element_it_should_evaluate_to_half(){
+        int[] sampleArray={1,2,5,6};
+        int[] sampleArray2={3,4,5,6};
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+
+        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
+
+        assertEquals(0.5,result);
+    }
+
+    @Test
+    void two_array_of_one_the_same_element_it_should_evaluate_to_qa(){
+        int[] sampleArray={1,2,5,6};
+        int[] sampleArray2={3,4,5,7};
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+
+        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
+
+        assertEquals(0.5,result);
+    }
+
 }
