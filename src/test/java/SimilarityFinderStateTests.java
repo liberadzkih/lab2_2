@@ -6,10 +6,11 @@ import org.junit.jupiter.api.Test;
 
 public class SimilarityFinderStateTests {
     private int[] seq1 = {0, 1, 2, 3, 4};
+    private int[] seq2 = {0};
     private int[] emptySeq = {};
 
     @Test
-    public void twoSameSequencesJaccardTest(){
+    public void twoSameSequencesJaccardTest() {
         SequenceSearcher stub = (elem, seq) -> SearchResult.builder().withFound(false).build();
 
         SimilarityFinder similarityFinder = new SimilarityFinder(stub);
@@ -36,5 +37,18 @@ public class SimilarityFinderStateTests {
         double jackardSimilarity = similarityFinder.calculateJackardSimilarity(emptySeq, seq1);
 
         Assertions.assertEquals(0, jackardSimilarity, 0.001);
+    }
+
+    @Test
+    public void oneElementMatchJaccardTest() {
+        SequenceSearcher stub = (elem, seq) -> {
+            for (int i : seq) {
+                if (i == elem)
+                    return SearchResult.builder().withFound(true).build();
+            }
+            return SearchResult.builder().withFound(false).build();
+        };
+        SimilarityFinder similarityFinder = new SimilarityFinder(stub);
+        Assertions.assertEquals(0.2, similarityFinder.calculateJackardSimilarity(seq1, seq2),0.001);
     }
 }
