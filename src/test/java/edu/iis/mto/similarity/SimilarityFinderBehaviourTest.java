@@ -26,4 +26,9 @@ class SimilarityFinderBehaviourTest {
         similarityFinder.calculateJackardSimilarity(seq3,seq10);
         assertEquals(4,mock.getCounter());
     }
+
+    @Test void return_number_of_iterations_equal_size_of_first_seq2() {
+        similarityFinder.calculateJackardSimilarity(seq1,seq6);
+        assertEquals(1,mock.getCounter());
+    }
 }
