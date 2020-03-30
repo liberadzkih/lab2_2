@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SimilarityFinderBehaviorTests {
     private SimilarityFinder similarityFinder;
@@ -11,6 +12,7 @@ public class SimilarityFinderBehaviorTests {
     private int[] emptySequence = {};
     private int[] singleElementSequence = {1};
     private int[] multipleElementsSequence = {-4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
+    private int[] multipleElementsSequenceFromZero = {0, 1, 2, 3, 4};
 
     @BeforeEach
     public void prepareEnvironmentToTest() {
@@ -28,5 +30,12 @@ public class SimilarityFinderBehaviorTests {
     public void searchShouldNotBeInvokedForEmptySequenceAsFirstArgument() {
         similarityFinder.calculateJackardSimilarity(emptySequence, singleElementSequence);
         assertEquals(0, sequenceSearcherMock.getNumberOfInvocations());
+    }
+
+    @Test
+    public void searchShouldBeInvokedOnceForSingleElementSequenceAsFirstArgument() {
+        similarityFinder.calculateJackardSimilarity(singleElementSequence, emptySequence);
+        assertEquals(1, sequenceSearcherMock.getNumberOfInvocations());
+        assertTrue(sequenceSearcherMock.checkIfCalled(singleElementSequence[0], emptySequence));
     }
 }
