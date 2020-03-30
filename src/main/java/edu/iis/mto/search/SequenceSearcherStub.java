@@ -9,7 +9,7 @@ public class SequenceSearcherStub implements SequenceSearcher {
 
         SearchResult.Builder builder = SearchResult.builder();
 
-        OptionalInt result = Arrays.stream(seq).filter(i -> seq[i] == elem).findFirst();
+        OptionalInt result = Arrays.stream(seq, 0, seq.length).filter(var -> var == elem).findFirst();
 
         builder.withFound(result.isPresent());
         if(result.isPresent()) builder.withPosition(result.getAsInt());
