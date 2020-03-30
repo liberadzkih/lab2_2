@@ -32,4 +32,10 @@ public class SimilarityFinderBehaviourTests {
         similarityFinder.calculateJackardSimilarity(emptySeq, seq1);
         sequenceSearcherMock.verifyInvocationNumber(0);
     }
+
+    @Test
+    public void twoEmptySequenceTest() {
+        similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq);
+        sequenceSearcherMock.verifyInvocationNumber(0);
+    }
 }
