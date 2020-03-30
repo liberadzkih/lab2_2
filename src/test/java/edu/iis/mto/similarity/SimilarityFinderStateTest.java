@@ -63,16 +63,4 @@ class SimilarityFinderStateTest {
                 similarityFinder.calculateJackardSimilarity(SEQ_WITH_MULTIPLE_ELEMENTS1, SEQ_WITH_MULTIPLE_ELEMENTS1),
                 is(equalTo(FULL_MATCH)));
     }
-
-    @Test
-    void shouldThrowExceptionWhenNullParameter1() {
-        assertThrows(NullPointerException.class,
-                () -> similarityFinder.calculateJackardSimilarity(null, SEQ_WITH_ONE_ELEMENT));
-    }
-
-    @Test
-    void shouldThrowExceptionWhenNullParameter2() {
-        assertThrows(NullPointerException.class,
-                () -> similarityFinder.calculateJackardSimilarity(SEQ_WITH_ONE_ELEMENT, null));
-    }
 }
