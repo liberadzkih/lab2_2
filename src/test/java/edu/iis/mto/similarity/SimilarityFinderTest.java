@@ -81,4 +81,52 @@ class SimilarityFinderTest {
             return SearchResult.builder().build();
         }
     }
+
+    @Test
+    public void callsNumber() {
+        int[] sequence1 = { 0, 1, 2, 3, 4, 5 };
+        int[] sequence2 = { 6, 1, 2, 3, 4, 8 };
+
+        SequenceSearcherDoubler sequenceSearcherDoubler = new SequenceSearcherDoubler();
+        simFinder = new SimilarityFinder(sequenceSearcherDoubler);
+
+        simFinder.calculateJackardSimilarity(sequence1, sequence2);
+        Assert.assertThat(sequenceSearcherDoubler.getCallsNumber(),is(equalTo(6)));
+    }
+
+    @Test
+    public void allSequencesEmpty() {
+        int[] sequence1 = {  };
+        int[] sequence2 = {  };
+
+        SequenceSearcherDoubler sequenceSearcherDoubler = new SequenceSearcherDoubler();
+        simFinder = new SimilarityFinder(sequenceSearcherDoubler);
+
+        simFinder.calculateJackardSimilarity(sequence1, sequence2);
+        Assert.assertThat(sequenceSearcherDoubler.getCallsNumber(),is(equalTo(0)));
+    }
+
+    @Test
+    public void secondSequenceEmpty() {
+        int[] sequence1 = { 0, 1, 2, 3, 4, 5 };
+        int[] sequence2 = {  };
+
+        SequenceSearcherDoubler sequenceSearcherDoubler = new SequenceSearcherDoubler();
+        simFinder = new SimilarityFinder(sequenceSearcherDoubler);
+
+        simFinder.calculateJackardSimilarity(sequence1, sequence2);
+        Assert.assertThat(sequenceSearcherDoubler.getCallsNumber(),is(equalTo(6)));
+    }
+
+    @Test
+    public void firstSequenceEmpty() {
+        int[] sequence1 = {  };
+        int[] sequence2 = { 6, 1, 2, 3, 4, 8 };
+
+        SequenceSearcherDoubler sequenceSearcherDoubler = new SequenceSearcherDoubler();
+        simFinder = new SimilarityFinder(sequenceSearcherDoubler);
+
+        simFinder.calculateJackardSimilarity(sequence1, sequence2);
+        Assert.assertThat(sequenceSearcherDoubler.getCallsNumber(),is(equalTo(0)));
+    }
 }
