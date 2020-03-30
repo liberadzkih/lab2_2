@@ -16,7 +16,7 @@ public class SimilarityFinderStateTests {
         SimilarityFinder similarityFinder = new SimilarityFinder(stub);
         double jackardSimilarity = similarityFinder.calculateJackardSimilarity(seq1, seq1);
 
-        Assertions.assertEquals(0, jackardSimilarity, 0.001);
+        Assertions.assertEquals(0, jackardSimilarity, 0.00000001);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class SimilarityFinderStateTests {
         SimilarityFinder similarityFinder = new SimilarityFinder(stub);
         double jackardSimilarity = similarityFinder.calculateJackardSimilarity(emptySeq, emptySeq);
 
-        Assertions.assertEquals(1, jackardSimilarity, 0.001);
+        Assertions.assertEquals(1, jackardSimilarity, 0.00000001);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class SimilarityFinderStateTests {
         SimilarityFinder similarityFinder = new SimilarityFinder(stub);
         double jackardSimilarity = similarityFinder.calculateJackardSimilarity(emptySeq, seq1);
 
-        Assertions.assertEquals(0, jackardSimilarity, 0.001);
+        Assertions.assertEquals(0, jackardSimilarity, 0.00000001);
     }
 
     @Test
@@ -49,6 +49,6 @@ public class SimilarityFinderStateTests {
             return SearchResult.builder().withFound(false).build();
         };
         SimilarityFinder similarityFinder = new SimilarityFinder(stub);
-        Assertions.assertEquals(0.2, similarityFinder.calculateJackardSimilarity(seq1, seq2),0.001);
+        Assertions.assertEquals(0.2, similarityFinder.calculateJackardSimilarity(seq1, seq2),0.00000001);
     }
 }
