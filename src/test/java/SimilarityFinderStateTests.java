@@ -27,4 +27,14 @@ public class SimilarityFinderStateTests {
 
         Assertions.assertEquals(1, jackardSimilarity, 0.001);
     }
+
+    @Test
+    public void oneEmptySequenceJaccardTest() {
+        SequenceSearcher stub = (elem, seq) -> SearchResult.builder().withFound(false).build();
+
+        SimilarityFinder similarityFinder = new SimilarityFinder(stub);
+        double jackardSimilarity = similarityFinder.calculateJackardSimilarity(emptySeq, seq1);
+
+        Assertions.assertEquals(0, jackardSimilarity, 0.001);
+    }
 }
