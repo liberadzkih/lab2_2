@@ -1,6 +1,7 @@
 package edu.iis.mto.similarity;
 
 import edu.iis.mto.search.SequenceSearcherImplementation;
+import edu.iis.mto.search.SequenceSearcherMock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,6 +71,20 @@ class SimilarityFinderTest {
         double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
 
         assertEquals(1,result);
+    }
+
+    //testy zachowania
+    @Test
+    void array_of_size_x_should_inovoke_searcher_x_times(){
+        int[] sampleArray={1,2,3,4,5};
+        int[] sampleArray2={3,4,5,6,7,8,9};
+
+        SequenceSearcherMock mock =new SequenceSearcherMock();
+        SimilarityFinder similarityFinder=new SimilarityFinder(mock);
+
+        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
+
+        assertEquals(5,mock.getSearchInvocationCounter());
     }
 
 }
