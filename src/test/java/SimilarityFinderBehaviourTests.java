@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 public class SimilarityFinderBehaviourTests {
 
+    private int[] emptySeq = {};
     private int[] seq1 = {0, 1, 2, 3, 4};
     private int[] seq2 = {10, 20, 30, 40, 50};
 
@@ -24,5 +25,11 @@ public class SimilarityFinderBehaviourTests {
         sequenceSearcherMock.verifyInvocation(2, seq2);
         sequenceSearcherMock.verifyInvocation(3, seq2);
         sequenceSearcherMock.verifyInvocation(4, seq2);
+    }
+
+    @Test
+    public void oneEmptySequenceTest() {
+        similarityFinder.calculateJackardSimilarity(emptySeq, seq1);
+        sequenceSearcherMock.verifyInvocationNumber(0);
     }
 }
