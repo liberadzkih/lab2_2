@@ -40,4 +40,17 @@ public class SimilarityFinderStateTests {
         }));
         assertEquals(0.1, similarityFinder.calculateJackardSimilarity(singleElementSequence, multipleElementsSequence), 0.0001);
     }
+
+    @Test
+    public void fullMatchTest() {
+        SimilarityFinder similarityFinder = new SimilarityFinder(((elem, seq) -> {
+            for (int sequenceElement : seq) {
+                if (sequenceElement == elem) {
+                    return SearchResult.builder().withFound(true).build();
+                }
+            }
+            return SearchResult.builder().withFound(false).build();
+        }));
+        assertEquals(1, similarityFinder.calculateJackardSimilarity(multipleElementsSequence, multipleElementsSequence), 0.0001);
+    }
 }
