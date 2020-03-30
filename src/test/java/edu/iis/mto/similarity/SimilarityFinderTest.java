@@ -37,4 +37,8 @@ class SimilarityFinderTest {
         assertEquals(1.0,similarityFinder.calculateJackardSimilarity(seq8,seq9));
     }
 
+    @Test void  return_zero_if_there_are_one_empty_and_one_single_element_sequences() {
+        assertEquals(0.0,similarityFinder.calculateJackardSimilarity(seq8,seq2));
+    }
+
 }
