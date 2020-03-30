@@ -50,4 +50,15 @@ class SimilarityFinderTest {
         assertEquals(0.25,result);
     }
 
+    @Test
+    void two_empty_array_should_evaluate_to_one(){
+        int[] sampleArray={};
+        int[] sampleArray2={};
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+
+        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
+
+        assertEquals(1,result);
+    }
+
 }
