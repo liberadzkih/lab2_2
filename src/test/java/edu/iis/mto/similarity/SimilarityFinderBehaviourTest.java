@@ -9,16 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SimilarityFinderBehaviourTest {
 
     int[] seq1={2};
-    int[] seq2={3};
     int[] seq3={2,3,5,6};
-    int[] seq4={9,7,4,1};
-    int[] seq5={3};
     int[] seq6={4,5,6};
-    int[]seq7={5,6,4};
-    int[] seq8={};
-    int[] seq9 ={};
     int[] seq10={6,9,1,3,0};
-    int[] seq11={6,2,9,7,8};
     SecondMockForSequenceSearcher mock = new SecondMockForSequenceSearcher();
     SimilarityFinder similarityFinder = new SimilarityFinder(mock);
 
