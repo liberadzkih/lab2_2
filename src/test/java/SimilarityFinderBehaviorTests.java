@@ -38,4 +38,13 @@ public class SimilarityFinderBehaviorTests {
         assertEquals(1, sequenceSearcherMock.getNumberOfInvocations());
         assertTrue(sequenceSearcherMock.checkIfCalled(singleElementSequence[0], emptySequence));
     }
+
+    @Test
+    public void searchShouldBeInvokedLengthOfFirstSequenceTimes() {
+        similarityFinder.calculateJackardSimilarity(multipleElementsSequence, multipleElementsSequenceFromZero);
+        assertEquals(multipleElementsSequence.length, sequenceSearcherMock.getNumberOfInvocations());
+        for (int i = 0; i < multipleElementsSequence.length; i++) {
+            assertTrue(sequenceSearcherMock.checkIfCalled(multipleElementsSequence[i], multipleElementsSequenceFromZero));
+        }
+    }
 }
