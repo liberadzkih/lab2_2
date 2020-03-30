@@ -17,4 +17,15 @@ class SimilarityFinderTest {
         assertEquals(1,result);
     }
 
+    @Test
+    void two_same_array_of_one_element_when_dont_have_it_should_evaluate_to_zero(){
+        int[] sampleArray={1};
+        int[] sampleArray2={3};
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+
+        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
+
+        assertEquals(0,result);
+    }
+
 }
