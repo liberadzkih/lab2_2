@@ -3,11 +3,11 @@ package edu.iis.mto.search;
 import java.util.Arrays;
 import java.util.TreeMap;
 
-class MockSequenceSearcher implements SequenceSearcher {
-    private int amountOfInvocations;
+public class MockSequenceSearcher implements SequenceSearcher {
+    public int amountOfInvocations;
     private TreeMap<Integer, int[]> parametersCalled;
 
-    MockSequenceSearcher() {
+    public MockSequenceSearcher() {
         amountOfInvocations = 0;
         parametersCalled = new TreeMap<>();
     }
@@ -19,7 +19,7 @@ class MockSequenceSearcher implements SequenceSearcher {
         return SearchResult.builder().build();
     }
 
-    boolean verifyParameter(int elem, int[] seq) {
+    public boolean verifyParameter(int elem, int[] seq) {
         if (!parametersCalled.containsKey(elem)) {
             return false;
         }
