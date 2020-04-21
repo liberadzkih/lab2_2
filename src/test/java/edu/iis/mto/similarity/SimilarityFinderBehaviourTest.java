@@ -2,6 +2,8 @@ package edu.iis.mto.similarity;
 
 
 import edu.iis.mto.search.MockSequenceSearcher;
+import edu.iis.mto.search.SearchResult;
+import edu.iis.mto.search.SequenceSearcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +18,9 @@ public class SimilarityFinderBehaviourTest {
     MockSequenceSearcher mockSequenceSearcher;
 
     @BeforeEach
-    void intit() {
+    void init() {
         mockSequenceSearcher = new MockSequenceSearcher();
+        similarityFinder = new SimilarityFinder(mockSequenceSearcher);
     }
 
     @Test
