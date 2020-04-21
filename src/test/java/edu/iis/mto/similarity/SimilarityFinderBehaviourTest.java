@@ -48,6 +48,7 @@ class SimilarityFinderBehaviourTest {
     @BeforeEach
     void intit() {
         mockSequenceSearcher = new MockSequenceSearcher();
+        similarityFinder=new SimilarityFinder(mockSequenceSearcher);
     }
 
     @Test
