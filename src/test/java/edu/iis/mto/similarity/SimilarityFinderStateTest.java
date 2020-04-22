@@ -1,5 +1,6 @@
 package edu.iis.mto.similarity;
 
+import edu.iis.mto.search.SequenceSearcherMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,8 @@ class SimilarityFinderStateTest {
 
     @BeforeEach
     public void setup() {
-        //IMPLEMENTATION MUST BE PROVIDED BEFORE STARTING TESTS
-        //similarityFinder = new SimilarityFinder();
+        SequenceSearcherMock sequenceSearcherMock = new SequenceSearcherMock();
+        similarityFinder = new SimilarityFinder(sequenceSearcherMock);
     }
 
     @Test
