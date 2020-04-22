@@ -46,41 +46,11 @@ class SimilarityFinderTest {
         }
     }
 
-    private class SequenceSearcherImplementation implements SequenceSearcher{
-        @Override public SearchResult search(int elem, int[] seq) {
-            for(int i=0;i<seq.length;i++){
-                if(seq[i]==elem){
-                    return SearchResult.builder()
-                                       .withPosition(i)
-                                       .withFound(true)
-                                       .build();
-
-                }
-
-            }
-            return SearchResult.builder()
-                               .withPosition(-1)
-                               .withFound(false)
-                               .build();
-        }
-
-    }
-
-    @Test
-    void two_same_array_of_one_element_when_has_it_should_evaluate_to_one(){
-        int[] sampleArray={1};
-        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
-
-        double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray);
-
-        assertEquals(1,result);
-    }
-
     @Test
     void two_same_array_of_one_element_when_dont_have_it_should_evaluate_to_zero(){
         int[] sampleArray={1};
         int[] sampleArray2={3};
-        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherMock());
 
         double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
 
@@ -92,7 +62,7 @@ class SimilarityFinderTest {
     void two_array_with_one_empty_should_evaluate_to_zero(){
         int[] sampleArray={0};
         int[] sampleArray2={};
-        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherMock());
 
         double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
 
@@ -103,7 +73,7 @@ class SimilarityFinderTest {
     void two_array_both_empty_should_evaluate_to_one(){
         int[] sampleArray={};
         int[] sampleArray2={};
-        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherImplementation());
+        SimilarityFinder similarityFinder=new SimilarityFinder(new SequenceSearcherMock());
 
         double result = similarityFinder.calculateJackardSimilarity(sampleArray,sampleArray2);
 
