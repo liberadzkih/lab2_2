@@ -1,6 +1,7 @@
 package edu.iis.mto.similarity;
 
 import edu.iis.mto.search.MockForSequenceSearcher;
+import edu.iis.mto.search.SecondMockForSequenceSearcher;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +47,22 @@ class SimilarityFinderTest {
     @Test void  return_quarter_if_two_five_elements_sequences_have_two_the_same_element() { // 0.25 = 2/(5+5-2)
         assertEquals(0.25,similarityFinder.calculateJackardSimilarity(seq10,seq11));
     }
+    int[] seq12={2};
+    int[] seq13={2,3,5,6};
+    int[] seq14={4,5,6};
+    int[] seq15={6,9,1,3,0};
 
+    SecondMockForSequenceSearcher mock = new SecondMockForSequenceSearcher();
+    SimilarityFinder similarityFinder2 = new SimilarityFinder(mock);
+
+    @Test void return_number_of_iterations_equal_size_of_first_seq() {
+        similarityFinder2.calculateJackardSimilarity(seq13,seq15);
+        assertEquals(4,mock.getCounter());
+    }
+
+    @Test void return_number_of_iterations_equal_size_of_first_seq2() {
+        similarityFinder2.calculateJackardSimilarity(seq12,seq14);
+        assertEquals(1,mock.getCounter());
+    }
 
 }
