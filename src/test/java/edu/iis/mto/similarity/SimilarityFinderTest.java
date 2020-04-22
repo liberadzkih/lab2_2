@@ -1,12 +1,70 @@
 package edu.iis.mto.similarity;
 
-import edu.iis.mto.search.SequenceSearcherImplementation;
-import edu.iis.mto.search.SequenceSearcherMock;
+import edu.iis.mto.search.SearchResult;
+import edu.iis.mto.search.SequenceSearcher;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimilarityFinderTest {
+
+    private class SequenceSearcherMock implements SequenceSearcher {
+        private Set<int[]> passedSequences = new HashSet<>();
+        private List<Integer> elements= new ArrayList<>();
+        private int searchInvocationCounter=0;
+
+        @Override public SearchResult search(int elem, int[] seq) {
+            searchInvocationCounter++;
+            elements.add(elem);
+            passedSequences.add(seq);
+            return SearchResult.builder().build();
+        }
+
+        public Set<int[]> getPassedSequences() {
+            return passedSequences;
+        }
+
+        public   boolean hasSameElements(int[] expectedElements) {
+            if (elements.size() != expectedElements.length) {
+                return false;
+            }
+            for (int expectedElement : expectedElements) {
+                if (!elements.contains(expectedElement)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public int getSearchInvocationCounter() {
+            return searchInvocationCounter;
+        }
+    }
+
+    private class SequenceSearcherImplementation implements SequenceSearcher{
+        @Override public SearchResult search(int elem, int[] seq) {
+            for(int i=0;i<seq.length;i++){
+                if(seq[i]==elem){
+                    return SearchResult.builder()
+                                       .withPosition(i)
+                                       .withFound(true)
+                                       .build();
+
+                }
+
+            }
+            return SearchResult.builder()
+                               .withPosition(-1)
+                               .withFound(false)
+                               .build();
+        }
+
+    }
 
     @Test
     void two_same_array_of_one_element_when_has_it_should_evaluate_to_one(){
