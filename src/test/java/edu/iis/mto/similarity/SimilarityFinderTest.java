@@ -5,8 +5,6 @@ import edu.iis.mto.search.SequenceSearcher;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.util.stream.IntStream;
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
@@ -27,7 +25,7 @@ class SimilarityFinderTest {
         int[] sequence2 = { 3, 0, 5, 2, 1, 4 };
 
         simFinder = new SimilarityFinder((findingTheSame, sequence) -> {
-            if (IntStream.of(sequence).anyMatch(x -> x == findingTheSame)) {
+            if(findingTheSame == sequence[0] || findingTheSame == sequence[1] || findingTheSame == sequence[2] || findingTheSame == sequence[3] || findingTheSame == sequence[4] || findingTheSame == sequence[5]) {
                 return SearchResult.builder().withFound(true).build();
             } else {
                 return SearchResult.builder().withFound(false).build();
@@ -53,7 +51,7 @@ class SimilarityFinderTest {
         int[] sequence2 = { 6, 1, 2, 3, 4, 8 };
 
         simFinder = new SimilarityFinder((findingTheSame, sequence) -> {
-            if (IntStream.of(sequence).anyMatch(x -> x == findingTheSame)) {
+            if(findingTheSame == sequence[0] || findingTheSame == sequence[1] || findingTheSame == sequence[2] || findingTheSame == sequence[3] || findingTheSame == sequence[4] || findingTheSame == sequence[5]) {
                 return SearchResult.builder().withFound(true).build();
             } else {
                 return SearchResult.builder().withFound(false).build();
