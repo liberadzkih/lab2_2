@@ -45,11 +45,6 @@ public class SequenceSearcherMock implements SequenceSearcher {
     @Override
     public SearchResult search(int elem, int[] seq) {
         invocationSet.add(new Invocation(elem, seq));
-        for (int i = 0; i < seq.length; i++) {
-            if (seq[i] == elem) {
-                return SearchResult.builder().withFound(true).withPosition(i).build();
-            }
-        }
-        return SearchResult.builder().withFound(false).withPosition(-1).build();
+        return SearchResult.builder().build();
     }
 }
