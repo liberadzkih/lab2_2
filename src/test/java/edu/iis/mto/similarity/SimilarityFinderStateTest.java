@@ -8,10 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.sun.tools.classfile.Annotation.element_value;
+
+import edu.iis.mto.search.SearchResult;
+
 class SimilarityFinderStateTest {
 
-    private SimilarityFinder similarityFinder;
-    private SequenceSearcherMock sequenceSearcherMock;
     private static final double FULL_MATCH = 1.0d;
     private static final double ONE_FIFTH_MATCH = 0.2d;
     private static final double ZERO_MATH = 0.0d;
@@ -21,11 +23,14 @@ class SimilarityFinderStateTest {
     private final int[] SEQ_WITH_MULTIPLE_ELEMENTS1 = { 1, 2, 3, 4, 5 };
     private final int[] SEQ_WITH_MULTIPLE_ELEMENTS2 = { 10, 20, 30, 40 };
 
-    @BeforeEach
-    void setUp() {
-        sequenceSearcherMock = new SequenceSearcherMock();
-        similarityFinder = new SimilarityFinder(sequenceSearcherMock);
-    }
+    SimilarityFinder similarityFinder = new SimilarityFinder((elem, seq) -> {
+        for (int i = 0; i < seq.length; i++) {
+            if (elem == seq[i]) {
+                return SearchResult.builder().withFound(true).build();
+            }
+        }
+        return SearchResult.builder().withFound(false).build();
+    });
 
     @Test
     void shouldReturnOneWhenTwoEmptySeq() {
