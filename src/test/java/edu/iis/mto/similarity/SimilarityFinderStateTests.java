@@ -13,34 +13,37 @@ public class SimilarityFinderStateTests {
 	private static final double NONE_SIMILAR = 0.0;
 	private static final double TEST_DELTA = 0.001;
 	
-	private static SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher());
-	
 	@Test
 	public void emptySeqencesAreSimilar() {
+		SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher(true, 0));
 		double result = similarityFinder.calculateJackardSimilarity(EMPTY_SEQUENCE, EMPTY_SEQUENCE);
 		assertEquals(FULLY_SIMILAR, result, TEST_DELTA);
 	}
 	
 	@Test
 	public void emptyAndFilledSeqencesAreNotSimilar() {
+		SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher());
 		double result = similarityFinder.calculateJackardSimilarity(EMPTY_SEQUENCE, FIRST_SEQUENCE);
 		assertEquals(NONE_SIMILAR, result, TEST_DELTA);
 	}
 	
 	@Test
 	public void sameSeqencesAreSimilar() {
+		SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher(true, 0));
 		double result = similarityFinder.calculateJackardSimilarity(FIRST_SEQUENCE, FIRST_SEQUENCE);
 		assertEquals(FULLY_SIMILAR, result, TEST_DELTA);
 	}
 	
 	@Test
 	public void differentSeqencesAreNotSimilar() {
+		SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher());
 		double result = similarityFinder.calculateJackardSimilarity(FIRST_SEQUENCE, SECOND_SEQUENCE);
 		assertEquals(NONE_SIMILAR, result, TEST_DELTA);
 	}
 	
 	@Test
 	public void invertedSeqencesAreSimilar() {
+		SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher(true, 0));
 		double result = similarityFinder.calculateJackardSimilarity(FIRST_SEQUENCE, INVERTED_FIRST_SEQUENCE);
 		assertEquals(FULLY_SIMILAR, result, TEST_DELTA);
 	}

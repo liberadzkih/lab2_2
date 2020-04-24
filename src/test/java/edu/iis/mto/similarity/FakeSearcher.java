@@ -5,9 +5,17 @@ import edu.iis.mto.search.SequenceSearcher;
 
 public class FakeSearcher implements SequenceSearcher {
 	private int invocations = 0;
+	private boolean found;
+	private int position;
 	
 	public FakeSearcher() {
-		// empty
+		found = false;
+		position = -1;
+	}
+	
+	public FakeSearcher(boolean found, int position) {
+		this.found = found;
+		this.position = position;
 	}
 
 	public int getInvocations() {
@@ -17,6 +25,6 @@ public class FakeSearcher implements SequenceSearcher {
 	@Override
 	public SearchResult search(int elem, int[] seq) {
 		invocations += 1;
-		return SearchResult.builder().build();
+		return SearchResult.builder().withFound(found).withPosition(position).build();
 	}
 }
