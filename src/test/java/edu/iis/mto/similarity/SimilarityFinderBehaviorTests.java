@@ -1,31 +1,44 @@
 package edu.iis.mto.similarity;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.iis.mto.search.SimpleSearcher;
-
 public class SimilarityFinderBehaviorTests {
-	private static final int[] SEQUENCE = { 1, 2, 3, 4 };
+	private static final int[] EMPTY_SEQUENCE = { };
+	private static final int[] FIRST_SEQUENCE = { 1, 2, 3, 4 };
+	private static final int[] SECOND_SEQUENCE = { 5, 6, 7, 8 };
 	
-	private static SimilarityFinder similarityFinder = new SimilarityFinder(new SimpleSearcher());
+	private static FakeSearcher fakeSearcher;
+	private static SimilarityFinder similarityFinder;
+	
+	@BeforeEach
+	public void beforeEach() {
+		fakeSearcher = new FakeSearcher();
+		similarityFinder = new SimilarityFinder(fakeSearcher);
+	}
 	
 	@Test
-	public void nullAsSeqencesThrows() {
-		assertThrows(NullPointerException.class, () -> similarityFinder.calculateJackardSimilarity(null, null));
+	public void invocationsWithDifferentSequences() {
+		similarityFinder.calculateJackardSimilarity(FIRST_SEQUENCE, SECOND_SEQUENCE);
+		assertEquals(4, fakeSearcher.getInvocations());
 	}
 	
-	public void nullAsFirstSeqencesThrows() {
-		assertThrows(NullPointerException.class, () -> similarityFinder.calculateJackardSimilarity(null, SEQUENCE));
+	@Test
+	public void invocationsWithFirstEmptySequence() {
+		similarityFinder.calculateJackardSimilarity(EMPTY_SEQUENCE, SECOND_SEQUENCE);
+		assertEquals(0, fakeSearcher.getInvocations());
 	}
 	
-	public void nullAsSecondSeqencesThrows() {
-		assertThrows(NullPointerException.class, () -> similarityFinder.calculateJackardSimilarity(SEQUENCE, null));
+	@Test
+	public void invocationsWithSecondEmptySequence() {
+		similarityFinder.calculateJackardSimilarity(FIRST_SEQUENCE, EMPTY_SEQUENCE);
+		assertEquals(4, fakeSearcher.getInvocations());
 	}
 	
-	public void nullAsFinderThrows() {
-		similarityFinder = new SimilarityFinder(null);
-		assertThrows(NullPointerException.class, () -> similarityFinder.calculateJackardSimilarity(SEQUENCE, SEQUENCE));
+	@Test
+	public void invocationsWithBothEmptySequences() {
+		similarityFinder.calculateJackardSimilarity(EMPTY_SEQUENCE, EMPTY_SEQUENCE);
+		assertEquals(0, fakeSearcher.getInvocations());
 	}
 }

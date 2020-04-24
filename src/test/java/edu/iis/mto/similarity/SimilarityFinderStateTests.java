@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import edu.iis.mto.search.SimpleSearcher;
-
 public class SimilarityFinderStateTests {
 	private static final int[] EMPTY_SEQUENCE = { };
 	private static final int[] FIRST_SEQUENCE = { 1, 2, 3, 4 };
@@ -15,7 +13,7 @@ public class SimilarityFinderStateTests {
 	private static final double NONE_SIMILAR = 0.0;
 	private static final double TEST_DELTA = 0.001;
 	
-	private static SimilarityFinder similarityFinder = new SimilarityFinder(new SimpleSearcher());
+	private static SimilarityFinder similarityFinder = new SimilarityFinder(new FakeSearcher());
 	
 	@Test
 	public void emptySeqencesAreSimilar() {
