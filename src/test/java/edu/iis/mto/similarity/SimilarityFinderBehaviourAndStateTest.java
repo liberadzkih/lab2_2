@@ -9,13 +9,71 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SimilarityFinderBehaviourTest {
+public class SimilarityFinderBehaviourAndStateTest {
     private int[] empty = {};
     private int[] seq1 = {1};
     private int[] seq2 = {1, 2, 3, 4, 5};
     private int[] seq3 = {10, 9, 8, 7, 6};
+    int[] testseqDifferentElement = {41};
+    int[] testseqTenElements = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     SimilarityFinder similarityFinder;
     MockSequenceSearcher mockSequenceSearcher;
+    SequenceSearcher stub;
+
+    @Test
+    void calculateJackardSimilarity_bothSeqAreEmpty() {
+        stub = (elem, seq) -> SearchResult.builder().withFound(false).build();
+        similarityFinder = new SimilarityFinder(stub);
+        assertEquals(1.0d, similarityFinder.calculateJackardSimilarity(empty, empty));
+    }
+
+    @Test
+    void calculateJackardSimilarity_seq1IsEmpty() {
+        stub = (elem, seq) -> SearchResult.builder().withFound(false).build();
+        similarityFinder = new SimilarityFinder(stub);
+        assertEquals(0.0d, similarityFinder.calculateJackardSimilarity(empty, testseqTenElements));
+    }
+
+    @Test
+    void calculateJackardSimilarity_seq2IsEmpty() {
+        stub = (elem, seq) -> SearchResult.builder().withFound(false).build();
+        similarityFinder = new SimilarityFinder(stub);
+        assertEquals(0.0d, similarityFinder.calculateJackardSimilarity(testseqTenElements, empty));
+    }
+
+    @Test
+    void calculateJackardSimilarity_oneElementMatches() {
+        stub = (elem, seq) -> {
+            for (int i : seq) {
+                if (i == elem)
+                    return SearchResult.builder().withFound(true).build();
+            }
+            return SearchResult.builder().withFound(false).build();
+        };
+        similarityFinder = new SimilarityFinder(stub);
+
+
+        assertEquals(0.1d, similarityFinder.calculateJackardSimilarity(seq1, testseqTenElements));
+        assertEquals(0.1d, similarityFinder.calculateJackardSimilarity(testseqTenElements, seq1));
+    }
+
+    @Test
+    void calculateJackardSimilarity_allElementsMatch() {
+        stub = (elem, seq) -> SearchResult.builder().withFound(true).build();
+        similarityFinder = new SimilarityFinder(stub);
+        assertEquals(1.0d, similarityFinder.calculateJackardSimilarity(seq1, seq1));
+        assertEquals(1.0d, similarityFinder.calculateJackardSimilarity(testseqTenElements, testseqTenElements));
+    }
+
+    @Test
+    void calculateJackardSimilarity_noMatchingElements() {
+        stub = (elem, seq) -> SearchResult.builder().withFound(false).build();
+        similarityFinder = new SimilarityFinder(stub);
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(seq1,testseqDifferentElement));
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqDifferentElement,seq1));
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqTenElements,testseqDifferentElement));
+        assertEquals(0.0d,similarityFinder.calculateJackardSimilarity(testseqDifferentElement,testseqTenElements));
+    }
 
     @BeforeEach
     void init() {
