@@ -3,7 +3,7 @@ package edu.iis.mto.search;
 import java.util.Arrays;
 import java.util.OptionalInt;
 
-public class SequenceSearcherStub implements SequenceSearcher {
+public class SequenceSearcherMock implements SequenceSearcher {
 
     int elemParam;
     int[] seqParam;
@@ -12,20 +12,21 @@ public class SequenceSearcherStub implements SequenceSearcher {
 
     @Override
     public SearchResult search(int elem, int[] seq) {
-
-        count++;
-
-        elemParam = elem;
-        seqParam = seq;
-
-        SearchResult.Builder builder = SearchResult.builder();
-
-        OptionalInt result = Arrays.stream(seq, 0, seq.length).filter(var -> var == elem).findFirst();
-
-        builder.withFound(result.isPresent());
-        if(result.isPresent()) builder.withPosition(result.getAsInt());
-
-        return builder.build();
+//
+//        count++;
+//
+//        elemParam = elem;
+//        seqParam = seq;
+//
+//        SearchResult.Builder builder = SearchResult.builder();
+//
+//        OptionalInt result = Arrays.stream(seq, 0, seq.length).filter(var -> var == elem).findFirst();
+//
+//        builder.withFound(result.isPresent());
+//        if(result.isPresent()) builder.withPosition(result.getAsInt());
+//
+//        return builder.build();
+        return SearchResult.builder().withFound(true).withPosition(0).build();
     }
 
     public int getElemParam() {
@@ -49,7 +50,7 @@ public class SequenceSearcherStub implements SequenceSearcher {
     }
 
     public static void setCount(int count) {
-        SequenceSearcherStub.count = count;
+        SequenceSearcherMock.count = count;
     }
 
 }
