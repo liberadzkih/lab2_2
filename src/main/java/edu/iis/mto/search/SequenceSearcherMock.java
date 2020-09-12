@@ -2,7 +2,8 @@ package edu.iis.mto.search;
 
 public class SequenceSearcherMock implements SequenceSearcher {
 
-    @Override public SearchResult search(int elem, int[] seq) {
+    @Override
+    public SearchResult search(int elem, int[] seq) {
         if (seq == null || seq.length == 0) {
             throw new IllegalArgumentException("Sequence is empty");
         }
