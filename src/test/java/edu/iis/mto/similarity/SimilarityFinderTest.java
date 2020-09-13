@@ -4,6 +4,8 @@ import edu.iis.mto.search.SearchResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -101,6 +103,43 @@ public class SimilarityFinderTest {
         int seq2[] = {-1, 0, 1, 2, 3, 7};
         double jaccardIndexOfSimilarity = similarityFinder.calculateJaccardSimilarity(seq1, seq2);
         assertThat(jaccardIndexOfSimilarity, equalTo((double) 5 / 6));
+    }
+
+    @Test
+    public void jaccardSimilarity_bothSequencesAreNull_testForNullPointerException() {
+        int seq1[] = null;
+        int seq2[] = null;
+        assertThrows(NullPointerException.class, () -> similarityFinder.calculateJaccardSimilarity(seq1, seq2));
+    }
+
+    @Test
+    public void jaccardSimilarity_firstSeqIsEmpty_getCountOfSearchMethodCall() {
+        int seq1[] = {};
+        int seq2[] = {1, 2, 3, 7};
+        SequenceSearcherMock sequenceSearcherMock = new SequenceSearcherMock();
+        similarityFinder = new SimilarityFinder(sequenceSearcherMock);
+        similarityFinder.calculateJaccardSimilarity(seq1, seq2);
+        assertThat(sequenceSearcherMock.getSearchCalls(), equalTo(seq1.length));
+    }
+
+    @Test
+    public void jaccardSimilarity_secondSeqIsEmpty_getCountOfSearchMethodCall() {
+        int seq1[] = {1, 2};
+        int seq2[] = {};
+        SequenceSearcherMock sequenceSearcherMock = new SequenceSearcherMock();
+        similarityFinder = new SimilarityFinder(sequenceSearcherMock);
+        similarityFinder.calculateJaccardSimilarity(seq1, seq2);
+        assertThat(sequenceSearcherMock.getSearchCalls(), equalTo(seq1.length));
+    }
+
+    @Test
+    public void jaccardSimilarity_getCountOfSearchMethodCall() {
+        int seq1[] = {1, 2, 234, 678, 890};
+        int seq2[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        SequenceSearcherMock sequenceSearcherMock = new SequenceSearcherMock();
+        similarityFinder = new SimilarityFinder(sequenceSearcherMock);
+        similarityFinder.calculateJaccardSimilarity(seq1, seq2);
+        assertThat(sequenceSearcherMock.getSearchCalls(), equalTo(seq1.length));
     }
 
 }
